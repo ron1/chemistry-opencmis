@@ -40,6 +40,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.chemistry.opencmis.commons.PropertyIds;
 import org.apache.chemistry.opencmis.commons.data.AllowableActions;
+import org.apache.chemistry.opencmis.commons.data.ContentSizeContentStream;
 import org.apache.chemistry.opencmis.commons.data.ContentStream;
 import org.apache.chemistry.opencmis.commons.data.FailedToDeleteData;
 import org.apache.chemistry.opencmis.commons.data.ObjectData;
@@ -408,6 +409,13 @@ public final class ObjectService {
 
         if ((content == null) || (content.getStream() == null)) {
             throw new CmisRuntimeException("Content stream is null!");
+        }
+
+        // check if Content-Length header should be set
+        if (content instanceof ContentSizeContentStream) {
+            if (content.getBigLength() != null && content.getBigLength().signum() >= 0) {
+                response.setHeader("Content-Length", content.getBigLength().toString());
+            }
         }
 
         String contentType = content.getMimeType();
