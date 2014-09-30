@@ -34,7 +34,7 @@
     <groupId>org.apache.chemistry.opencmis</groupId>
     <artifactId>chemistry-opencmis</artifactId>
     <name>Apache Chemistry OpenCMIS</name>
-    <version>0.11.0-CKS2-SNAPSHOT</version>
+    <version>0.11.0-CKS2</version>
     <packaging>pom</packaging>
 
     <organization>
